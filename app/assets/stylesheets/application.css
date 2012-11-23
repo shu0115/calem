@@ -23,3 +23,86 @@
 #schedule_end_time_1i {
   width: 70px;
 }
+
+.sunday{
+  color: #f00;
+}
+
+.saturday{
+  color: #00f;
+}
+
+td {
+  padding: 5px;
+}
+
+/* リンク */
+a {
+  color: #ff7500;
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  background-color: #fff;
+/*  text-decoration: underline;*/
+}
+
+/* カレンダー */
+.calendar_area table, .calendar_area td, .calendar_area th {
+  border: 1px solid #bbb;
+/*  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;*/
+  padding: 8px;
+}
+
+/* カレンダー内 リンク */
+.calendar_area a {
+  color: #000000;
+/*  text-decoration: underline;*/
+}
+
+/* カレンダー内 スタイル */
+.calendar_area th, .calendar_area td {
+  text-align: left;
+  vertical-align: top;
+}
+
+/* カレンダー内 曜日カラム */
+.calendar_area .calendar th {
+  padding: 5px;
+  text-align: center;
+  vertical-align: middle;
+/*  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;*/
+}
+
+/* カレンダー内 日付 */
+.calendar_area .calendar td {
+  padding: 5px;
+  width: 100px;
+  height: 100px;
+  text-align: left;
+  vertical-align: top;
+/*  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;*/
+}
+
+/* 日曜日 */
+.calendar_area .sunday, .calendar_area .sunday a {
+  color: #ff0000;
+}
+
+/* 土曜日 */
+.calendar_area .saturday, .calendar_area .saturday a {
+  color: #0000ff;
+}
+
+/* 今日 */
+.calendar_area .today {
+  background-color: #ddeeff;
+}
+
+/* カレンダー内部スケジュール名 */
+.calendar_area .schedule_title {
+  font-size: 12px;
+}

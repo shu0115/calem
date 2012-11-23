@@ -38,3 +38,56 @@
 <br />
 
 <%= link_to t( "menu.top" ), :root %>
+
+<br />
+<br />
+
+<div class="calendar_area">
+<table class="calendar">
+  <tr>
+    <th class="sunday">日</th>
+    <th>月</th>
+    <th>火</th>
+    <th>水</th>
+    <th>木</th>
+    <th>金</th>
+    <th class="saturday">土</th>
+  </tr>
+
+  <tr>
+    <% @now_date.beginning_of_month.wday.times{ %>
+      <td><br /></td>
+    <% } %>
+
+    <% (@now_date.beginning_of_month..@now_date.end_of_month).each{ |now_day| %>
+      <%# 土日祝日判定 %>
+      <% if now_day.wday == 0 or @holiday_hash.has_key?(now_day) %>
+        <% day_class = "sunday" %>
+      <% elsif now_day.wday == 6 %>
+        <% day_class = "saturday" %>
+      <% end %>
+
+      <%# 今日判定 %>
+      <% if now_day.day == Time.now.day %>
+        <% today_class = "today" %>
+      <% end %>
+
+      <% if now_day.wday == 0 %><tr><% end %>
+
+      <%# 内容 %>
+      <td class="<%= day_class %> <%= today_class %>">
+        <%= link_to( now_day.day, new_schedule_path(date: now_day) ) %><br />
+        <% if @schedule_hash[now_day.strftime("%Y_%m_%d")].present? %>
+          <%= @schedule_hash[now_day.strftime("%Y_%m_%d")].title %><br />
+        <% end %>
+      </td>
+
+      <% if now_day.wday == 6 %></tr><% end %>
+    <% } %>
+
+    <% (6 - @now_date.end_of_month.wday).times{ %>
+      <td><br /></td>
+    <% } %>
+  </tr>
+</table>
+</div>
