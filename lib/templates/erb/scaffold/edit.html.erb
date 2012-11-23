@@ -1,0 +1,31 @@
+
+<h1>Editing <%= singular_table_name %></h1>
+
+<%%= form_for( :<%= singular_table_name %>, url: <%= singular_table_name %>_path( @<%= singular_table_name %> ), method: :put ) do |f| %>
+  <%% if @<%= singular_table_name %>.errors.any? %>
+    <div id="error_explanation">
+      <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
+
+      <ul>
+      <%% @<%= singular_table_name %>.errors.full_messages.each{ |msg| %>
+        <li><%%= msg %></li>
+      <%% } %>
+      </ul>
+    </div>
+  <%% end %>
+
+<% attributes.each do |attribute| -%>
+  <div class="field">
+    <%%= f.label :<%= attribute.name %> %><br />
+    <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
+  </div>
+
+<% end -%>
+  <div class="actions">
+    <%%= f.submit t( "menu.update" ), data: { 'disable-with' => t( "menu.update" ) } %>
+  </div>
+<%% end %>
+
+
+<%%= link_to t( "menu.show" ), <%= singular_table_name %>_path( @<%= singular_table_name %> ) %>
+ | <%%= link_to t( "menu.list" ), <%= plural_table_name %>_path %>
