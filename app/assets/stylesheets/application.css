@@ -8,6 +8,18 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
  *= require_tree .
+ *= require_self
  */
+
+.schedules_form select {
+  width: 55px;
+}
+
+#schedule_start_time_1i {
+  width: 70px;
+}
+
+#schedule_end_time_1i {
+  width: 70px;
+}

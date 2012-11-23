@@ -1,0 +1,27 @@
+
+<p>
+  <b>User:</b><%= @schedule.user_id %>
+</p>
+
+<p>
+  <b>Title:</b><%= @schedule.title %>
+</p>
+
+<p>
+  <b>Set date:</b><%= @schedule.set_date %>
+</p>
+
+<p>
+  <b>Note:</b><%= @schedule.note %>
+</p>
+
+<p>
+  <b>Start time:</b><%= @schedule.start_time %>
+</p>
+
+<p>
+  <b>End time:</b><%= @schedule.end_time %>
+</p>
+
+<%= link_to t( "menu.edit" ), edit_schedule_path( @schedule ) %>
+ | <%= link_to t( "menu.list" ), schedules_path %>

@@ -11,6 +11,24 @@ ja:
     create:  "Create"
     update:  "Update"
 
+  activerecord:
+    models:
+      schedule: "スケジュール"
+    attributes:
+      schedule:
+        title: "タイトル"
+        start_time: "開始時刻"
+        end_time: "終了時刻"
+        note: "メモ"
+
+  # activerecord:
+  #   attributes:
+  #     schedule:
+  #       title: "タイトル"
+  #       start_time: "開始時刻"
+  #       end_time: "終了時刻"
+  #       note: "メモ"
+
   date:
     abbr_day_names:
     - 日

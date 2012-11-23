@@ -1,0 +1,40 @@
+
+<!-- <h1>Listing schedules</h1> -->
+<br />
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Title</th>
+    <th>Set date</th>
+    <th>Note</th>
+    <th>Start time</th>
+    <th>End time</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @schedules.each{ |schedule| %>
+  <tr>
+    <td><%= schedule.user_id %></td>
+    <td><%= schedule.title %></td>
+    <td><%= schedule.set_date %></td>
+    <td><%= schedule.note %></td>
+    <td><%= schedule.start_time %></td>
+    <td><%= schedule.end_time %></td>
+    <td><%= link_to t( "menu.show" ), schedule_path( schedule ) %></td>
+    <td><%= link_to t( "menu.edit" ), edit_schedule_path( schedule ) %></td>
+    <td><%= link_to t( "menu.destroy" ), schedule_path( schedule ), method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %></td>
+  </tr>
+<% } %>
+</table>
+
+<br />
+
+<%= link_to t( "menu.new" ), new_schedule_path %>
+
+<br />
+<br />
+
+<%= link_to t( "menu.top" ), :root %>
