@@ -13,3 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(function(){
+  $('a[rel=tooltip]').tooltip( { html: true, placement: 'bottom' } );
+  $('a[rel=popover]').popover( { html: true, placement: 'bottom', trigger: 'hover' } );
+});

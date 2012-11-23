@@ -46,6 +46,9 @@
   </div>
 <% end %>
 
+<p>
+  <%= link_to t( "menu.show" ), schedule_path( @schedule ) %>
+   | <%= link_to t( "menu.destroy" ), schedule_path( @schedule ), method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
+</p>
 
-<%= link_to t( "menu.show" ), schedule_path( @schedule ) %>
- | <%= link_to t( "menu.list" ), schedules_path %>
+<p><%= link_to t( "menu.list" ), schedules_path %></p>

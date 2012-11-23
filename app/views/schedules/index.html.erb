@@ -1,7 +1,7 @@
 
 <!-- <h1>Listing schedules</h1> -->
-<br />
 
+<% if false %>
 <table>
   <tr>
     <th>User</th>
@@ -41,6 +41,8 @@
 
 <br />
 <br />
+<% end %>
+
 
 <div class="calendar_area">
 <table class="calendar">
@@ -77,8 +79,14 @@
       <%# 内容 %>
       <td class="<%= day_class %> <%= today_class %>">
         <%= link_to( now_day.day, new_schedule_path(date: now_day) ) %><br />
-        <% if @schedule_hash[now_day.strftime("%Y_%m_%d")].present? %>
-          <%= @schedule_hash[now_day.strftime("%Y_%m_%d")].title %><br />
+        <% schedule = @schedule_hash[now_day.strftime("%Y_%m_%d")] %>
+        <% if schedule.present? %>
+          <%# ツールチップ内容 %>
+          <% tooltip = (schedule.start_time.strftime("%m/%d %H:%M") if schedule.start_time.present?) + "〜" + (schedule.end_time.strftime("%m/%d %H:%M") unless schedule.end_time.blank?) + "\n#{raw show_markdown(schedule.note)}" %>
+
+          <%# スケジュールリンク %>
+          <%= link_to( schedule.title, edit_schedule_path(schedule), rel: "tooltip", data: { 'original-title' => tooltip } ) %>
+          <br />
         <% end %>
       </td>
 

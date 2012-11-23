@@ -63,7 +63,7 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.where( id: id, user_id: session[:user_id] ).first
 
     if @schedule.update_attributes( schedule )
-      redirect_to( schedule_path( @schedule ), notice: "Schedule was successfully updated." )
+      redirect_to( schedules_path( now_date: @schedule.start_time ), notice: "Schedule was successfully updated." )
     else
       render action: "edit"
     end
