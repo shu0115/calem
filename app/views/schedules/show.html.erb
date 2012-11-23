@@ -1,26 +1,27 @@
 
 <p>
-  <b>User:</b><%= @schedule.user_id %>
+  <b>User:</b><br />
+  <%= @schedule.user_id %>
 </p>
 
 <p>
-  <b>Title:</b><%= @schedule.title %>
+  <b>Title:</b><br />
+  <%= @schedule.title %>
 </p>
 
 <p>
-  <b>Set date:</b><%= @schedule.set_date %>
+  <b>Start time:</b><br />
+  <%= @schedule.start_time.strftime("%Y/%m/%d %H:%M") %>
 </p>
 
 <p>
-  <b>Note:</b><%= @schedule.note %>
+  <b>End time:</b><br />
+  <%= @schedule.end_time.strftime("%Y/%m/%d %H:%M") %>
 </p>
 
 <p>
-  <b>Start time:</b><%= @schedule.start_time %>
-</p>
-
-<p>
-  <b>End time:</b><%= @schedule.end_time %>
+  <b>Note:</b><br />
+  <%= raw show_markdown(@schedule.note) %>
 </p>
 
 <%= link_to t( "menu.edit" ), edit_schedule_path( @schedule ) %>

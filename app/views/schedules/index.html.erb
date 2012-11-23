@@ -1,48 +1,12 @@
 
-<!-- <h1>Listing schedules</h1> -->
-
-<% if false %>
-<table>
-  <tr>
-    <th>User</th>
-    <th>Title</th>
-    <th>Set date</th>
-    <th>Note</th>
-    <th>Start time</th>
-    <th>End time</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @schedules.each{ |schedule| %>
-  <tr>
-    <td><%= schedule.user_id %></td>
-    <td><%= schedule.title %></td>
-    <td><%= schedule.set_date %></td>
-    <td><%= schedule.note %></td>
-    <td><%= schedule.start_time %></td>
-    <td><%= schedule.end_time %></td>
-    <td><%= link_to t( "menu.show" ), schedule_path( schedule ) %></td>
-    <td><%= link_to t( "menu.edit" ), edit_schedule_path( schedule ) %></td>
-    <td><%= link_to t( "menu.destroy" ), schedule_path( schedule ), method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %></td>
-  </tr>
-<% } %>
-</table>
+<h3><%= @now_date.strftime("%Y年%m月") %></h3>
 
 <br />
-
-<%= link_to t( "menu.new" ), new_schedule_path %>
-
+<%= link_to( "今日", schedules_path( now_date: Time.now.strftime("%Y-%m-01") ) ) %>
 <br />
+<%= link_to( "前月", schedules_path( now_date: @now_date.ago(1.month).strftime("%Y-%m-01") ) ) %>
+<%= link_to( "次月", schedules_path( now_date: @now_date.since(1.month).strftime("%Y-%m-01") ) ) %>
 <br />
-
-<%= link_to t( "menu.top" ), :root %>
-
-<br />
-<br />
-<% end %>
-
 
 <div class="calendar_area">
 <table class="calendar">
@@ -70,7 +34,7 @@
       <% end %>
 
       <%# 今日判定 %>
-      <% if now_day.day == Time.now.day %>
+      <% if now_day.strftime("%Y/%m/%d") == Time.now.strftime("%Y/%m/%d") %>
         <% today_class = "today" %>
       <% end %>
 

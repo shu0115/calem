@@ -42,7 +42,13 @@ a {
   text-decoration: none;
 }
 
+a:link { color: #ff7500; }
+a:visited { color: #ff7500; }
+a:hover { color: #ff7500; }
+a:active { color: #ff7500; }
+
 a:hover, a:active {
+/*  color: #ff7500;*/
   background-color: #fff;
 /*  text-decoration: underline;*/
 }

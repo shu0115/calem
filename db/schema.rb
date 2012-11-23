@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(:version => 20121123064235) do
   create_table "schedules", :force => true do |t|
     t.integer  "user_id"
     t.string   "title"
-    t.date     "set_date"
     t.text     "note"
     t.datetime "start_time"
     t.datetime "end_time"
