@@ -50,7 +50,7 @@ class SchedulesController < ApplicationController
     @schedule.user_id = session[:user_id]
 
     if @schedule.save
-      redirect_to( schedules_path( now_date: @schedule.start_time ) )
+      redirect_to( schedules_path( now_date: @schedule.start_time.strftime("%Y-%m-01") ) )
     else
       render action: "new"
     end
@@ -63,7 +63,7 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.where( id: id, user_id: session[:user_id] ).first
 
     if @schedule.update_attributes( schedule )
-      redirect_to( schedules_path( now_date: @schedule.start_time ) )
+      redirect_to( schedules_path( now_date: @schedule.start_time.strftime("%Y-%m-01") ) )
     else
       render action: "edit"
     end
