@@ -2,7 +2,7 @@
 <h3><%= @now_date.strftime("%Y年%m月") %></h3>
 
 <br />
-<%= link_to( "今日", schedules_path( now_date: Time.now.strftime("%Y-%m-01") ) ) %>
+<%= link_to( "今月", schedules_path( now_date: Time.now.strftime("%Y-%m-01") ) ) %>
 <br />
 <%= link_to( "前月", schedules_path( now_date: @now_date.ago(1.month).strftime("%Y-%m-01") ) ) %>
 <%= link_to( "次月", schedules_path( now_date: @now_date.since(1.month).strftime("%Y-%m-01") ) ) %>
