@@ -42,7 +42,9 @@
 
       <%# 内容 %>
       <td class="<%= day_class %> <%= today_class %>">
-        <%= link_to( now_day.day, new_schedule_path(date: now_day) ) %><br />
+        <%# 日付リンク %>
+        <%= link_to( now_day.day, new_schedule_path(date: now_day), rel: "tooltip", data: { 'original-title' => @holiday_hash[now_day].to_s } ) %><br />
+
         <% schedule = @schedule_hash[now_day.strftime("%Y_%m_%d")] %>
         <% if schedule.present? %>
           <%# ツールチップ内容 %>
