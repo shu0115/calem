@@ -112,3 +112,9 @@ a:hover, a:active {
 .calendar_area .schedule_title {
   font-size: 12px;
 }
+
+/* active_month */
+.active_month a {
+  color: #fff;
+  background-color: #ff7500;
+}

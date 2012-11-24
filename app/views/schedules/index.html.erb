@@ -1,5 +1,15 @@
 
-<h3><%= @now_date.strftime("%Y年%m月") %></h3>
+<h3>
+  <%= link_to( @now_date.strftime("%Y年"), schedules_path( now_date: Time.now.strftime("%Y-%m-01") ) ) %>
+</h3>
+
+<br />
+<% 1.upto(12){ |month| %>
+<span class="<%= (@now_date.month == month ? "active_month" : "") %>">
+  <%= link_to( "#{month}月", schedules_path( now_date: "#{@now_date.year}-#{month}-01" ), class: (@now_date.month == month ? "active_month" : "") ) %>
+</span>
+<% } %>
+<br />
 
 <br />
 <%= link_to( "今月", schedules_path( now_date: Time.now.strftime("%Y-%m-01") ) ) %>
