@@ -7,9 +7,14 @@ class SchedulesController < ApplicationController
     @now_date = now_date.present? ? Date.parse( now_date ) : Date.today
 
     # スケジュールハッシュ生成
-    @schedule_hash = Hash.new{ |hash, key| hash[key] = Hash.new }
-    @schedules = Schedule.where( user_id: session[:user_id] ).where( start_time: (@now_date.beginning_of_month..@now_date.end_of_month) ).all
-    @schedules.each{ |s| @schedule_hash[s.start_time.strftime("%Y_%m_%d")] = s }
+    @schedule_hash = Hash.new{ |hash, key| hash[key] = Array.new }
+    @schedules = Schedule.where( user_id: session[:user_id] ).where( start_time: (@now_date.beginning_of_month..@now_date.end_of_month) ).order( "start_time ASC" ).all
+    @schedules.each{ |s|
+      puts "[ ---------- @schedule_hash ---------- ]" ; @schedule_hash.tapp ;
+#      @schedule_hash[s.start_time.strftime("%Y_%m_%d")] ||= Array.new
+#      puts "[ ---------- @schedule_hash ---------- ]" ; @schedule_hash.tapp ;
+      @schedule_hash[s.start_time.strftime("%Y_%m_%d")].push(s)
+    }
 
     puts "[ ---------- @schedule_hash ---------- ]" ; @schedule_hash.tapp ;
 

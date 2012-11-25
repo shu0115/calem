@@ -57,12 +57,14 @@
 
         <% schedule = @schedule_hash[now_day.strftime("%Y_%m_%d")] %>
         <% if schedule.present? %>
-          <%# ツールチップ内容 %>
-          <% tooltip = (schedule.start_time.strftime("%H:%M") if schedule.start_time.present?) + "〜" + (schedule.end_time.strftime("%H:%M") unless schedule.end_time.blank?) + "\n#{raw show_markdown(schedule.note)}" %>
+          <% schedule.each{ |s| %>
+            <%# ツールチップ内容 %>
+            <% tooltip = (s.start_time.strftime("%H:%M") if s.start_time.present?) + "〜" + (s.end_time.strftime("%H:%M") unless s.end_time.blank?) + "\n#{raw show_markdown(s.note)}" %>
 
-          <%# スケジュールリンク %>
-          <%= link_to( schedule.title, edit_schedule_path(schedule), rel: "tooltip", data: { 'original-title' => tooltip } ) %>
-          <br />
+            <%# スケジュールリンク %>
+            <%= link_to( s.title, edit_schedule_path(s), rel: "tooltip", data: { 'original-title' => tooltip } ) %>
+            <br />
+          <% } %>
         <% end %>
       </td>
 
