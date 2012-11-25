@@ -8,9 +8,9 @@ class SchedulesController < ApplicationController
 
     # スケジュールハッシュ生成
     @schedule_hash = Hash.new{ |hash, key| hash[key] = Array.new }
-    @schedules = Schedule.where( user_id: session[:user_id] ).where( start_time: (@now_date.beginning_of_month..@now_date.end_of_month) ).order( "start_time ASC" ).all
+    @schedules = Schedule.where( user_id: session[:user_id] ).where( start_time: (@now_date.beginning_of_month.beginning_of_day..@now_date.end_of_month.end_of_day) ).order( "start_time ASC" ).all
+
     @schedules.each{ |s|
-      puts "[ ---------- @schedule_hash ---------- ]" ; @schedule_hash.tapp ;
 #      @schedule_hash[s.start_time.strftime("%Y_%m_%d")] ||= Array.new
 #      puts "[ ---------- @schedule_hash ---------- ]" ; @schedule_hash.tapp ;
       @schedule_hash[s.start_time.strftime("%Y_%m_%d")].push(s)
