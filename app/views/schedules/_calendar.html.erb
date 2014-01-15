@@ -1,28 +1,8 @@
-
-<h3>
-  <%= link_to( @now_date.strftime("%Y年"), schedules_path( now_date: Time.now.strftime("%Y-%m-01") ) ) %>
-</h3>
-
 <br />
-<% 1.upto(12){ |month| %>
-<span class="<%= (@now_date.month == month ? "active_month" : "") %>">
-  <%= link_to( "#{month}月", schedules_path( now_date: "#{@now_date.year}-#{month}-01" ), class: (@now_date.month == month ? "active_month" : "") ) %>
-</span>
-<% } %>
+<%= link_to( "前月", schedules_path( now_date: now_date.ago(1.month).strftime("%Y-%m-01") ) ) %>
+<%= link_to( "次月", schedules_path( now_date: now_date.since(1.month).strftime("%Y-%m-01") ) ) %>
 <br />
-
-<br />
-<%= link_to( "今月", schedules_path( now_date: Time.now.strftime("%Y-%m-01") ) ) %>
-
-<%# 今月 %>
-<%= render partial: '/schedules/calendar', locals: { now_date: @now_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash } %>
-
-<br />
-
-<%# 次月 %>
-<%= render partial: '/schedules/calendar', locals: { now_date: @next_date, holiday_hash: @next_holiday_hash, schedule_hash: @next_schedule_hash } %>
-
-<% if false %>
+<%= now_date.strftime("%Y年%m月") %>
 <div class="calendar_area">
 <table class="calendar">
   <tr>
@@ -36,13 +16,13 @@
   </tr>
 
   <tr>
-    <% @now_date.beginning_of_month.wday.times{ %>
+    <% now_date.beginning_of_month.wday.times{ %>
       <td><br /></td>
     <% } %>
 
-    <% (@now_date.beginning_of_month..@now_date.end_of_month).each{ |now_day| %>
+    <% (now_date.beginning_of_month..now_date.end_of_month).each{ |now_day| %>
       <%# 土日祝日判定 %>
-      <% if now_day.wday == 0 or @holiday_hash.has_key?(now_day) %>
+      <% if now_day.wday == 0 or holiday_hash.has_key?(now_day) %>
         <% day_class = "sunday" %>
       <% elsif now_day.wday == 6 %>
         <% day_class = "saturday" %>
@@ -58,9 +38,9 @@
       <%# 内容 %>
       <td class="<%= day_class %> <%= today_class %>">
         <%# 日付リンク %>
-        <%= link_to( now_day.day, new_schedule_path(date: now_day), rel: "tooltip", data: { 'original-title' => @holiday_hash[now_day].to_s } ) %><br />
+        <%= link_to( now_day.day, new_schedule_path(date: now_day), rel: "tooltip", data: { 'original-title' => holiday_hash[now_day].to_s } ) %><br />
 
-        <% schedule = @schedule_hash[now_day.strftime("%Y_%m_%d")] %>
+        <% schedule = schedule_hash[now_day.strftime("%Y_%m_%d")] %>
         <% if schedule.present? %>
           <% schedule.each{ |s| %>
             <%# ツールチップ内容 %>
@@ -76,10 +56,9 @@
       <% if now_day.wday == 6 %></tr><% end %>
     <% } %>
 
-    <% (6 - @now_date.end_of_month.wday).times{ %>
+    <% (6 - now_date.end_of_month.wday).times{ %>
       <td><br /></td>
     <% } %>
   </tr>
 </table>
 </div>
-<% end %>
