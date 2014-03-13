@@ -1,5 +1,3 @@
-# Please Design!
-
 # Calem
 
 APP_DESCRIPTION.
