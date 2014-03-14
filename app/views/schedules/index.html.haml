@@ -6,17 +6,24 @@
   %span{:class => (@now_date.month == month ? "active_month" : "")}
     = link_to( "#{month}月", schedules_path( now_date: "#{@now_date.year}-#{month}-01" ), class: (@now_date.month == month ? "active_month" : "") )
 
-%br/
-%br/
+/ %br/
+/ %br/
 
-= link_to( "今月", schedules_path( now_date: Time.now.strftime("%Y-%m-01") ) )
+/ = link_to( "今月", schedules_path( now_date: Time.now.strftime("%Y-%m-01") ) )
 
-= render partial: '/schedules/calendar', locals: { now_date: @now_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash }
+/ = render partial: '/schedules/calendar', locals: { now_date: @now_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash }
 
-%br/
+/ %br/
 
-= render partial: '/schedules/calendar', locals: { now_date: @next_date, holiday_hash: @next_holiday_hash, schedule_hash: @next_schedule_hash }
+/ = render partial: '/schedules/calendar', locals: { now_date: @next_date, holiday_hash: @next_holiday_hash, schedule_hash: @next_schedule_hash }
 
-- (6 - @now_date.end_of_month.wday).times do
-  %td
-    %br/
+/ - (6 - @now_date.end_of_month.wday).times do
+/   %td
+/     %br/
+
+= render partial: '/schedules/calendar', locals: { now_date: @now_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, current_page: 1 }
+
+/ オートページャー用
+= hidden_field_tag :autopager_on, true
+= hidden_field_tag :target_month, @now_date.strftime("%Y-%m")
+= hidden_field_tag :current_page, 1

@@ -17,4 +17,35 @@
 $(function(){
   $('a[rel=tooltip]').tooltip( { html: true, placement: 'bottom' } );
   $('a[rel=popover]').popover( { html: true, placement: 'bottom', trigger: 'hover' } );
+
+  if ($('#autopager_on').val() == 'true') { autopager(); };
 });
+
+// オートページャー
+function autopager() {
+  $(window).scroll(function() {
+    var obj = $(this);
+    var current = $(window).scrollTop() + window.innerHeight;
+    if (current < $(document).height() - 200) return;  // 下部に達していなければリターン
+    if (obj.data('loading')) { return };               // ロード中であればリターン
+
+    // パラメータ
+    var target_month = $('#target_month').val();
+    var next_month   = $('#next_month_' + target_month).val();
+    var page         = parseInt($('#current_page').val());
+    var next_page    = page + 1
+
+    obj.data('loading', true);  // ローディングフラグON
+    $.get(
+      "/schedules/pager",
+      // 送信データ
+      { 'target_month': target_month, 'page': page },
+      function(data, status) {
+        $('#page_' + page).after(data);     // データ追加
+        $('#current_page').val(next_page);  // ページ数更新
+        obj.data('loading', false);         // ローディングフラグOFF
+      },
+      "html"                                // 応答データ形式
+    );
+  });
+}
