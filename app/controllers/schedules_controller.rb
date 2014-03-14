@@ -70,7 +70,8 @@ class SchedulesController < ApplicationController
 
   def destroy(id)
     schedule = Schedule.where(id: id, user_id: current_user.id).first
-    schedule.destroy ? flash[:notice] = "Schedule was successfully deleted." : flash[:alert] = "Schedule was failed deleted."
+    # schedule.destroy ? flash[:notice] = "Schedule was successfully deleted." : flash[:alert] = "Schedule was failed deleted."
+    schedule.destroy ? flash[:notice] = "スケジュールを削除しました。" : flash[:alert] = "スケジュールが削除出来ませんでした。"
 
     redirect_to(schedules_path(now_date: schedule.start_time.strftime("%Y-%m-01")))
   end
