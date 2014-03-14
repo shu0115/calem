@@ -6,24 +6,6 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body{ 'data-no-turbolink' => true }
-    / .navbar-collapse.collapse.navbar-responsive-collapse
-    /   %ul.nav.navbar-nav
-    /     %li.navbar.offset2.active= link_to Settings.app_name, :root, class: "brand"
-    /     - unless session[:user_id].blank?
-    /       %li= render partial: '/layouts/user_icon', locals: { user: current_user }
-    /       %li{:class => params[:controller] == 'schedules' ? 'active' : ''}= link_to( "Schedules", { controller: "schedules" } )
-    /       %li= link_to( "Logout", logout_path )
-    /     - else
-    /       %li= link_to "Login", "/auth/#{Settings.provider}"
-    / %ul.nav.nav-tabs.navbar-fixed-top.backcolor_white.padding_top10
-    /   %li.navbar.offset2.active= link_to Settings.app_name, :root, class: "brand"
-    /   - unless session[:user_id].blank?
-    /     %li= render partial: '/layouts/user_icon', locals: { user: current_user }
-    /     %li{:class => params[:controller] == 'schedules' ? 'active' : ''}= link_to( "Schedules", { controller: "schedules" } )
-    /     %li= link_to( "Logout", logout_path )
-    /   - else
-    /     %li= link_to "Login", "/auth/#{Settings.provider}"
-
     .navbar.navbar-default.navbar-fixed-top
       .navbar-header
         = link_to Settings.app_name, :root, class: 'navbar-brand'
@@ -36,18 +18,16 @@
             %li= link_to "Logout", logout_path
           - else
             %li= link_to "Login", "/auth/#{Settings.provider}"
-
     .container
       .page_top_margin
-        %div
-          %br/
-          = simple_format( flash[:notice], style: "color: green;" ) unless flash[:notice].blank?
-          = simple_format( flash[:alert], style: "color: red;" ) unless flash[:alert].blank?
-          = yield
-          %br/
-          %br/
-          %center
-            Developed by
-            %a{:href => "https://twitter.com/#{Settings.programmer_twitter_id}/", :target => "_blank"}
-              @#{Settings.programmer_twitter_id}
-          %br
+        %br/
+        = simple_format( flash[:notice], style: "color: green;" ) unless flash[:notice].blank?
+        = simple_format( flash[:alert], style: "color: red;" ) unless flash[:alert].blank?
+        = yield
+        %br/
+        %br/
+        %center
+          Developed by
+          %a{:href => "https://twitter.com/#{Settings.programmer_twitter_id}/", :target => "_blank"}
+            @#{Settings.programmer_twitter_id}
+        %br
