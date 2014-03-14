@@ -19,6 +19,9 @@ $(function(){
   $('a[rel=tooltip]').tooltip( { html: true, placement: 'bottom' } );
   $('a[rel=popover]').popover( { html: true, placement: 'bottom', trigger: 'hover' } );
 
+  // aタグにtarget=blank指定
+  $('.target_blank a').attr('target' , '_blank');
+
   if ($('#autopager_on').val() == 'true') { autopager(); };
 });
 

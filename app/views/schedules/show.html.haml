@@ -1,9 +1,5 @@
 %br
 
-/ %p
-/   %b User:
-/   %br/
-/   = @schedule.user_id
 %p
   %b Title:
   %br/
@@ -19,7 +15,8 @@
 %p
   %b Note:
   %br/
-  = raw markdown(@schedule.note)
+  .target_blank
+    = raw markdown(@schedule.note)
 
 %br
 = link_to t("menu.edit"), edit_schedule_path(@schedule), class: 'btn btn-primary'
