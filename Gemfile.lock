@@ -27,10 +27,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     anbt-sql-formatter (0.0.2)
-    appsignal (0.8.7)
-      activesupport (>= 3.0)
-      rack
-      thread_safe
     arel (4.0.2)
     atomic (1.1.15)
     awesome_print (1.2.0)
@@ -260,7 +256,6 @@ PLATFORMS
 DEPENDENCIES
   action_args
   activesupport (>= 4.0.0)
-  appsignal
   awesome_print
   better_errors
   binding_of_caller
