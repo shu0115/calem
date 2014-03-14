@@ -5,34 +5,10 @@ class SchedulesController < ApplicationController
     @now_date = now_date.present? ? Date.parse(now_date) : Date.today
 
     # スケジュールハッシュ生成
-    @schedule_hash = Hash.new{ |hash, key| hash[key] = Array.new }
-    @schedules = Schedule.where(user_id: current_user.id).where(start_time: (@now_date.beginning_of_month.beginning_of_day..@now_date.end_of_month.end_of_day)).order("start_time ASC")
-    @schedules.each{ |s|
-      @schedule_hash[s.start_time.strftime("%Y_%m_%d")].push(s)
-    }
+    @schedule_hash = generate_schedule_hash(@now_date)
 
     # 祝日ハッシュ生成
-    @holiday_hash = Hash.new
-    HolidayJp.between(@now_date.beginning_of_month, @now_date.end_of_month).each{ |h|
-      @holiday_hash[h.date] = h.name
-    }
-
-    # ## 次月分
-    # @next_date = @now_date.next_month
-
-    # # スケジュールハッシュ生成
-    # @next_schedule_hash = Hash.new{ |hash, key| hash[key] = Array.new }
-    # schedules = Schedule.where(user_id: current_user.id).where( start_time: (@next_date.beginning_of_month.beginning_of_day..@next_date.end_of_month.end_of_day)).order("start_time ASC")
-
-    # schedules.each do |s|
-    #   @next_schedule_hash[s.start_time.strftime("%Y_%m_%d")].push(s)
-    # end
-
-    # # 祝日ハッシュ生成
-    # @next_holiday_hash = Hash.new
-    # HolidayJp.between(@next_date.beginning_of_month, @next_date.end_of_month).each do |h|
-    #   @next_holiday_hash[h.date] = h.name
-    # end
+    @holiday_hash = generate_holiday_hash(@now_date)
   end
 
   def show(id)
@@ -70,7 +46,6 @@ class SchedulesController < ApplicationController
 
   def destroy(id)
     schedule = Schedule.where(id: id, user_id: current_user.id).first
-    # schedule.destroy ? flash[:notice] = "Schedule was successfully deleted." : flash[:alert] = "Schedule was failed deleted."
     schedule.destroy ? flash[:notice] = "スケジュールを削除しました。" : flash[:alert] = "スケジュールが削除出来ませんでした。"
 
     redirect_to(schedules_path(now_date: schedule.start_time.strftime("%Y-%m-01")))
@@ -82,18 +57,34 @@ class SchedulesController < ApplicationController
     now_date = Date.parse(now_date.since(page.to_i.month).strftime("%Y-%m-01"))
 
     # スケジュールハッシュ生成
-    schedule_hash = Hash.new{ |hash, key| hash[key] = Array.new }
-    schedules = Schedule.where(user_id: current_user.id).where(start_time: (now_date.beginning_of_month.beginning_of_day..now_date.end_of_month.end_of_day)).order("schedules.start_time ASC")
-    schedules.each{ |s|
-      schedule_hash[s.start_time.strftime("%Y_%m_%d")].push(s)
-    }
+    schedule_hash = generate_schedule_hash(now_date)
 
     # 祝日ハッシュ生成
-    holiday_hash = Hash.new
-    HolidayJp.between(now_date.beginning_of_month, now_date.end_of_month).each{ |h|
-      holiday_hash[h.date] = h.name
-    }
+    holiday_hash = generate_holiday_hash(now_date)
 
     render partial: '/schedules/calendar', locals: { now_date: now_date, holiday_hash: holiday_hash, schedule_hash: schedule_hash, current_page: (page.to_i + 1) }
+  end
+
+  private
+
+  # スケジュールハッシュ生成
+  def generate_schedule_hash(now_date)
+    schedule_hash = Hash.new{ |hash, key| hash[key] = Array.new }
+    schedules = Schedule.mine(current_user).where(start_time: (now_date.beginning_of_month.beginning_of_day..now_date.end_of_month.end_of_day)).order("schedules.start_time ASC")
+    schedules.each do |s|
+      schedule_hash[s.start_time.strftime("%Y_%m_%d")].push(s)
+    end
+
+    return schedule_hash
+  end
+
+  # 祝日ハッシュ生成
+  def generate_holiday_hash(now_date)
+    holiday_hash = Hash.new
+    HolidayJp.between(now_date.beginning_of_month, now_date.end_of_month).each do |h|
+      holiday_hash[h.date] = h.name
+    end
+
+    return holiday_hash
   end
 end
