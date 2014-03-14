@@ -1,6 +1,4 @@
-# coding: utf-8
 class ApplicationController < ActionController::Base
-
   protect_from_forgery
 
   # ログイン認証
@@ -11,9 +9,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  #---------------#
-  # show_markdown #
-  #---------------#
   # Markdown変換
   def show_markdown( text )
     html_render = HtmlWithPygments.new( hard_wrap: true, filter_html: true )
@@ -21,12 +16,8 @@ class ApplicationController < ActionController::Base
 
     return markdown.render( text )
   end
-
   helper_method :show_markdown
 
-  #-----------#
-  # authorize #
-  #-----------#
   # ログイン認証
   def authorize
     # セッション／トップコントローラ以外で
@@ -41,21 +32,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  #-----------------------#
-  # reset_session_expires #
-  #-----------------------#
   # セッション期限延長
   def reset_session_expires
     request.session_options[:expire_after] = 2.weeks
   end
 
-  #--------------#
-  # current_user #
-  #--------------#
   def current_user
-    @current_user ||= User.where( id: session[:user_id] ).first
+    @current_user ||= User.find_by(id: session[:user_id])
   end
-
   helper_method :current_user
-
 end

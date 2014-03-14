@@ -1,0 +1,6 @@
+= form_for :schedule, url: schedules_path, html: { class: "schedules_form" } do |f|
+  = render partial: '/schedules/form', locals: { f: f }
+  .actions
+    = f.submit t("menu.create"), data: { 'disable-with' => t( "menu.create" ) }
+
+%p= link_to t("menu.list"), schedules_path

@@ -1,0 +1,10 @@
+%h1 Editing schedule
+= form_for :schedule, url: schedule_path(@schedule), method: :put, html: { class: "schedules_form" } do |f|
+  = render partial: '/schedules/form', locals: { f: f }
+  .actions
+    = f.submit t("menu.update"), data: { 'disable-with' => t( "menu.update" ) }
+
+%p
+  = link_to t("menu.show"), schedule_path(@schedule)
+  | #{link_to t("menu.destroy"), schedule_path(@schedule), method: :delete, data: { confirm: "「#{@schedule.title}」を削除します。よろしいですか？" }}
+%p= link_to t("menu.list"), schedules_path

@@ -1,12 +1,6 @@
-# coding: utf-8
 class User < ActiveRecord::Base
-  attr_accessible :provider, :uid, :name, :nickname, :image, :token, :secret
-
   private
 
-  #---------------------------#
-  # self.create_with_omniauth #
-  #---------------------------#
   def self.create_with_omniauth( auth )
     user = User.new
     user[:provider] = auth["provider"]
@@ -27,5 +21,4 @@ class User < ActiveRecord::Base
 
     return user
   end
-
 end
