@@ -24,57 +24,21 @@
     /   - else
     /     %li= link_to "Login", "/auth/#{Settings.provider}"
 
-    .navbar.navbar-default
+    .navbar.navbar-default.navbar-fixed-top
       .navbar-header
-        %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", type: "button"}
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        %a.navbar-brand{href: "#"} Brand
+        = link_to Settings.app_name, :root, class: 'navbar-brand'
       .navbar-collapse.collapse.navbar-responsive-collapse
         %ul.nav.navbar-nav
-          %li.active
-            %a{href: "#"} Active
-          %li
-            %a{href: "#"} Link
-          %li.dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-              Dropdown
-              %b.caret
-            %ul.dropdown-menu
-              %li
-                %a{href: "#"} Action
-              %li
-                %a{href: "#"} Another action
-              %li
-                %a{href: "#"} Something else here
-              %li.divider
-              %li.dropdown-header Dropdown header
-              %li
-                %a{href: "#"} Separated link
-              %li
-                %a{href: "#"} One more separated link
-        %form.navbar-form.navbar-left
-          %input.form-control.col-lg-8{placeholder: "Search", type: "text"}/
-        %ul.nav.navbar-nav.navbar-right
-          %li
-            %a{href: "#"} Link
-          %li.dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-              Dropdown
-              %b.caret
-            %ul.dropdown-menu
-              %li
-                %a{href: "#"} Action
-              %li
-                %a{href: "#"} Another action
-              %li
-                %a{href: "#"} Something else here
-              %li.divider
-              %li
-                %a{href: "#"} Separated link
+          - unless session[:user_id].blank?
+            %li= render partial: '/layouts/user_icon', locals: { user: current_user }
+            %li{ class: params[:controller] == 'schedules' ? 'active' : '' }
+              = link_to "Schedules", { controller: "schedules" }
+            %li= link_to "Logout", logout_path
+          - else
+            %li= link_to "Login", "/auth/#{Settings.provider}"
+
     .container
-      .margin_top50
+      .page_top_margin
         %div
           %br/
           = simple_format( flash[:notice], style: "color: green;" ) unless flash[:notice].blank?
