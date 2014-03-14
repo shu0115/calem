@@ -12,7 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require united/loader
+//= require united/bootswatch
 
 $(function(){
   $('a[rel=tooltip]').tooltip( { html: true, placement: 'bottom' } );

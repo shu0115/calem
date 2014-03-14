@@ -1,10 +1,12 @@
-%h1 Editing schedule
-= form_for :schedule, url: schedule_path(@schedule), method: :put, html: { class: "schedules_form" } do |f|
+= form_for :schedule, url: schedule_path(@schedule), method: :put, html: { class: "form-horizontal" } do |f|
   = render partial: '/schedules/form', locals: { f: f }
   .actions
-    = f.submit t("menu.update"), data: { 'disable-with' => t( "menu.update" ) }
+    = f.submit t("menu.update"), data: { 'disable-with' => t( "menu.update" ) }, class: 'btn btn-primary'
 
-%p
-  = link_to t("menu.show"), schedule_path(@schedule)
-  | #{link_to t("menu.destroy"), schedule_path(@schedule), method: :delete, data: { confirm: "「#{@schedule.title}」を削除します。よろしいですか？" }}
-%p= link_to t("menu.list"), schedules_path
+%br
+= link_to t("menu.show"), schedule_path(@schedule), class: 'btn btn-default'
+= link_to t("menu.destroy"), schedule_path(@schedule), method: :delete, data: { confirm: "「#{@schedule.title}」を削除します。よろしいですか？" }, class: 'btn btn-danger'
+
+%br
+%br
+= link_to t("menu.list"), schedules_path, class: 'btn btn-default'

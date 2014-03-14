@@ -1,7 +1,9 @@
-%p
-  %b User:
-  %br/
-  = @schedule.user_id
+%br
+
+/ %p
+/   %b User:
+/   %br/
+/   = @schedule.user_id
 %p
   %b Title:
   %br/
@@ -9,14 +11,16 @@
 %p
   %b Start time:
   %br/
-  = @schedule.start_time.strftime("%Y/%m/%d %H:%M")
+  = @schedule.start_time.strftime("%Y年%m月%d日 %H:%M")
 %p
   %b End time:
   %br/
-  = @schedule.end_time.strftime("%Y/%m/%d %H:%M")
+  = @schedule.end_time.strftime("%Y年%m月%d日 %H:%M")
 %p
   %b Note:
   %br/
   = raw markdown(@schedule.note)
-= link_to t("menu.edit"), edit_schedule_path(@schedule)
-| #{link_to t("menu.list"), schedules_path}
+
+%br
+= link_to t("menu.edit"), edit_schedule_path(@schedule), class: 'btn btn-primary'
+= link_to t("menu.list"), schedules_path, class: 'btn btn-default'

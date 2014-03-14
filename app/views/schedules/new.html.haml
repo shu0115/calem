@@ -1,6 +1,7 @@
-= form_for :schedule, url: schedules_path, html: { class: "schedules_form" } do |f|
+= form_for :schedule, url: schedules_path, html: { class: "form-horizontal" } do |f|
   = render partial: '/schedules/form', locals: { f: f }
   .actions
-    = f.submit t("menu.create"), data: { 'disable-with' => t( "menu.create" ) }
+    = f.submit t("menu.create"), data: { 'disable-with' => t( "menu.create" ) }, class: 'btn btn-primary'
 
-%p= link_to t("menu.list"), schedules_path
+%br
+= link_to t("menu.list"), schedules_path, class: 'btn btn-default'

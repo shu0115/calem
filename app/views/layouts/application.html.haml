@@ -5,17 +5,40 @@
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-  %body
-    %ul.nav.nav-tabs.navbar-fixed-top.backcolor_white.padding_top10
-      %li.navbar.offset2.active= link_to Settings.app_name, :root, class: "brand"
-      - unless session[:user_id].blank?
-        %li= render partial: '/layouts/user_icon', locals: { user: current_user }
-        %li{:class => params[:controller] == 'schedules' ? 'active' : ''}= link_to( "Schedules", { controller: "schedules" } )
-        %li= link_to( "Logout", logout_path )
-      - else
-        %li= link_to "Login", "/auth/#{Settings.provider}"
+  %body{ 'data-no-turbolink' => true }
+    / .navbar-collapse.collapse.navbar-responsive-collapse
+    /   %ul.nav.navbar-nav
+    /     %li.navbar.offset2.active= link_to Settings.app_name, :root, class: "brand"
+    /     - unless session[:user_id].blank?
+    /       %li= render partial: '/layouts/user_icon', locals: { user: current_user }
+    /       %li{:class => params[:controller] == 'schedules' ? 'active' : ''}= link_to( "Schedules", { controller: "schedules" } )
+    /       %li= link_to( "Logout", logout_path )
+    /     - else
+    /       %li= link_to "Login", "/auth/#{Settings.provider}"
+    / %ul.nav.nav-tabs.navbar-fixed-top.backcolor_white.padding_top10
+    /   %li.navbar.offset2.active= link_to Settings.app_name, :root, class: "brand"
+    /   - unless session[:user_id].blank?
+    /     %li= render partial: '/layouts/user_icon', locals: { user: current_user }
+    /     %li{:class => params[:controller] == 'schedules' ? 'active' : ''}= link_to( "Schedules", { controller: "schedules" } )
+    /     %li= link_to( "Logout", logout_path )
+    /   - else
+    /     %li= link_to "Login", "/auth/#{Settings.provider}"
+
+    .navbar.navbar-default.navbar-fixed-top
+      .navbar-header
+        = link_to Settings.app_name, :root, class: 'navbar-brand'
+      .navbar-collapse.collapse.navbar-responsive-collapse
+        %ul.nav.navbar-nav
+          - unless session[:user_id].blank?
+            %li= render partial: '/layouts/user_icon', locals: { user: current_user }
+            %li{ class: params[:controller] == 'schedules' ? 'active' : '' }
+              = link_to "Schedules", { controller: "schedules" }
+            %li= link_to "Logout", logout_path
+          - else
+            %li= link_to "Login", "/auth/#{Settings.provider}"
+
     .container
-      .margin_top50
+      .page_top_margin
         %div
           %br/
           = simple_format( flash[:notice], style: "color: green;" ) unless flash[:notice].blank?

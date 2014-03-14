@@ -1,12 +1,17 @@
-.field
-  = f.label :title
-  = f.text_field :title
-.field
-  = f.label :start_time
-  = f.datetime_select :start_time, use_month_numbers: true, default: Time.now, minute_step: 5
-.field
-  = f.label :end_time
-  = f.datetime_select :end_time, use_month_numbers: true, default: Time.now, minute_step: 5
-.field
-  = f.label :note
-  = f.text_area :note, class: "span8", rows: 15, cols: 40
+%fieldset
+  .form-group
+    = f.label :title, class: 'col-lg-2 control-label'
+    .col-lg-10
+      = f.text_field :title, class: 'form-control'
+
+    = f.label :start_time, class: 'col-lg-2 control-label'
+    .col-lg-10
+      = f.datetime_select :start_time, use_month_numbers: true, default: Time.now, minute_step: 5, class: 'form-control'
+
+    = f.label :end_time, class: 'col-lg-2 control-label'
+    .col-lg-10
+      = f.datetime_select :end_time, use_month_numbers: true, default: Time.now, minute_step: 5
+
+    = f.label :note, class: 'col-lg-2 control-label'
+    .col-lg-10
+      = f.text_area :note, class: "form-control", rows: 15, cols: 40
