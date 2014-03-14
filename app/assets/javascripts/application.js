@@ -27,7 +27,7 @@ function autopager() {
   $(window).scroll(function() {
     var obj = $(this);
     var current = $(window).scrollTop() + window.innerHeight;
-    if (current < $(document).height() - 200) return;  // 下部に達していなければリターン
+    if (current < $(document).height() - 400) return;  // 下部に達していなければリターン
     if (obj.data('loading')) { return };               // ロード中であればリターン
 
     // パラメータ
