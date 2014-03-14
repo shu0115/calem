@@ -17,9 +17,9 @@
 
 .container {
   position: absolute;
-  width: 900px;
+  width: 940px;
   left: 50%;
-  margin-left: -450px;
+  margin-left: -470px;
 }
 
 .page_top_margin {
@@ -50,11 +50,11 @@
   vertical-align: middle;
 }
 
-/* カレンダー内 日付 */
+/* カレンダー内 日付セル */
 .calendar_area .calendar td {
   padding: 5px;
-  width: 100px;
-  height: 100px;
+  width: 115px;
+  height: 115px;
   text-align: left;
   vertical-align: top;
 }
