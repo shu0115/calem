@@ -21,7 +21,7 @@
 
 /* カレンダー */
 .calendar_area table, .calendar_area td, .calendar_area th {
-  border: 1px solid #bbb;
+  border: 1px solid #ddd;
   padding: 8px;
 }
 
@@ -97,34 +97,3 @@ textarea {
   font-family: Courier;
   font-size: 12px;
 }
-
-/*pre {
-  font-family: Courier;
-  font-size: 12px;
-  background-color: #eee;
-  padding: 5px;
-}
-*/
-/*pre {
-  display: block;
-  padding: 9.5px;
-  margin: 0 0 10px;
-  font-size: 13px;
-  line-height: 1.42857143;
-  word-break: break-all;
-  word-wrap: normal;
-  color: #333333;
-  background-color: #f5f5f5;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-}
-pre code {
-  padding: 0;
-  font-size: inherit;
-  color: inherit;
-  white-space: pre-wrap;
-  background-color: transparent;
-  border-radius: 0;
-  word-wrap: normal;
-}
-*/
