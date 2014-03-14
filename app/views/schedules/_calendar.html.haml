@@ -38,7 +38,7 @@
             - if schedule.present?
               - schedule.each do |s|
                 - tooltip = (s.start_time.strftime("%H:%M") if s.start_time.present?) + "〜" + (s.end_time.strftime("%H:%M") unless s.end_time.blank?) + "\n#{raw markdown(s.note)}"
-                = link_to( s.title, edit_schedule_path(s), rel: "tooltip", data: { 'original-title' => tooltip } )
+                = link_to s.title, edit_schedule_path(s), rel: "tooltip", data: { 'original-title' => tooltip }
                 %br/
         - (6 - now_date.end_of_month.wday).times do
           %td

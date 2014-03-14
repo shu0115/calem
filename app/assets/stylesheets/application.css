@@ -97,3 +97,8 @@ textarea {
   font-family: Courier;
   font-size: 12px;
 }
+
+.calendar .tooltip li, .calendar .tooltip a{
+  color: #fff;
+  text-align: left;
+}

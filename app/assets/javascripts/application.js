@@ -16,7 +16,7 @@
 //= require united/bootswatch
 
 $(function(){
-  $('a[rel=tooltip]').tooltip( { html: true, placement: 'bottom' } );
+  $('a[rel=tooltip]').tooltip( { html: true, placement: 'bottom', trigger: 'hover' } );
   $('a[rel=popover]').popover( { html: true, placement: 'bottom', trigger: 'hover' } );
 
   // aタグにtarget=blank指定
