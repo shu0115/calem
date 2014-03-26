@@ -48,6 +48,9 @@ function autopager() {
         $('#page_' + page).after(data);     // データ追加
         $('#current_page').val(next_page);  // ページ数更新
         obj.data('loading', false);         // ローディングフラグOFF
+
+        $('a[rel=tooltip]').tooltip( { html: true, placement: 'bottom', trigger: 'hover' } );
+        $('a[rel=popover]').popover( { html: true, placement: 'bottom', trigger: 'hover' } );
       },
       "html"                                // 応答データ形式
     );
