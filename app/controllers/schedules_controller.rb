@@ -16,7 +16,7 @@ class SchedulesController < ApplicationController
   end
 
   def new(date)
-    @schedule = Schedule.new(start_time: date, end_time: date)
+    @schedule = Schedule.new(start_time: date.to_time, end_time: date.to_time)
   end
 
   def edit(id)
