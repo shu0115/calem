@@ -286,7 +286,6 @@ PLATFORMS
 DEPENDENCIES
   action_args
   activesupport (>= 4.0.0)
-  awesome_print
   better_errors
   binding_of_caller
   bounscale
@@ -317,7 +316,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 4.0.0)
   sqlite3
-  tapp
+  tapp-awesome_print
   therubyracer
   twitter-bootswatch-rails
   twitter-bootswatch-rails-fontawesome
