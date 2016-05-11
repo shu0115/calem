@@ -5,13 +5,6 @@ class SessionsController < ApplicationController
     user.auth_update(auth)
     session[:user_id] = user.id
 
-    # 保管URLへリダイレクト
-    unless session[:request_url].blank?
-      redirect_to session[:request_url]
-      session[:request_url] = nil
-      return
-    end
-
     redirect_to schedules_path, notice: "ログインしました。"
   end
 
@@ -24,5 +17,4 @@ class SessionsController < ApplicationController
   def failure
     render text: "<span style='color: red;'>Auth Failure</span>"
   end
-
 end

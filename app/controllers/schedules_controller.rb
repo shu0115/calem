@@ -1,7 +1,7 @@
 class SchedulesController < ApplicationController
   permits :user_id, :title, :note, :start_time, :end_time
 
-  def index(now_date)
+  def index(now_date: nil)
     @now_date = now_date.present? ? Date.parse(now_date) : Date.today
 
     # スケジュールハッシュ生成
@@ -52,7 +52,7 @@ class SchedulesController < ApplicationController
   end
 
   # オートページャー
-  def pager(target_month, page)
+  def pager(target_month: nil, page: 1)
     now_date = target_month.present? ? Date.parse("#{target_month}-01") : Date.today
     now_date = Date.parse(now_date.since(page.to_i.month).strftime("%Y-%m-01"))
 
