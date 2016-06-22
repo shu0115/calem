@@ -59,14 +59,19 @@
   vertical-align: top;
 }
 
-/* 日曜日 */
-.calendar_area .sunday, .calendar_area .sunday a {
-  color: #ff0000;
+/* 金曜 */
+.calendar_area .friday, .calendar_area .friday a {
+  color: gold;
 }
 
-/* 土曜日 */
+/* 土曜 */
 .calendar_area .saturday, .calendar_area .saturday a {
   color: #0000ff;
+}
+
+/* 日曜 */
+.calendar_area .sunday, .calendar_area .sunday a {
+  color: #ff0000;
 }
 
 /* 今日 */

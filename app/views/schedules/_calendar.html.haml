@@ -16,7 +16,7 @@
         %th 火
         %th 水
         %th 木
-        %th 金
+        %th.friday 金
         %th.saturday 土
       %tr
         - now_date.beginning_of_month.wday.times do
@@ -25,12 +25,16 @@
         - (now_date.beginning_of_month..now_date.end_of_month).each do |now_day|
           - if now_day.wday == 0 or holiday_hash.has_key?(now_day)
             - day_class = "sunday"
+          - elsif now_day.wday == 5
+            - day_class = "friday"
           - elsif now_day.wday == 6
             - day_class = "saturday"
+
           - if now_day.strftime("%Y/%m/%d") == Time.now.strftime("%Y/%m/%d")
             - today_class = "today"
           - if now_day.wday == 0
             %tr/
+
           %td{:class => "#{day_class} #{today_class}"}
             = link_to( now_day.day, new_schedule_path(date: now_day), rel: "tooltip", data: { 'original-title' => holiday_hash[now_day].to_s } )
             %br/
