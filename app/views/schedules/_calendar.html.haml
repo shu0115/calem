@@ -1,8 +1,5 @@
 
 %div{ id: "page_#{current_page}" }
-  -# %ul.pagination
-  -#   %li= link_to "今月", schedules_path(now_date: Time.now.strftime("%Y-%m-01"))
-  -# %br
   %ul.pagination
     %li= link_to "前月", schedules_path(now_date: now_date.ago(1.month).strftime("%Y-%m-01"))
     %li= link_to "今月", schedules_path(now_date: Time.now.strftime("%Y-%m-01"))
