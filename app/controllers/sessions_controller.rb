@@ -5,13 +5,13 @@ class SessionsController < ApplicationController
     user.auth_update(auth)
     session[:user_id] = user.id
 
-    redirect_to schedules_path, notice: "ログインしました。"
+    redirect_to schedules_path
   end
 
   def destroy
     session[:user_id] = nil
 
-    redirect_to :root, notice: "ログアウトしました。"
+    redirect_to :root
   end
 
   def failure
