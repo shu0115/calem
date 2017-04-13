@@ -1,11 +1,12 @@
-%h3= link_to( @now_date.strftime("%Y年"), schedules_path( now_date: Time.now.strftime("%Y-%m-01") ) )
+%h3= link_to(@now_date.strftime("%Y年"), schedules_path)
 
 %ul.pagination
+  %li= link_to '前年', schedules_path(now_date: @now_date.ago(1.year).to_date)
   - 1.upto(12) do |month|
     %li{ class: (@now_date.month == month ? "active" : "") }
       = link_to "#{month}月", schedules_path(now_date: "#{@now_date.year}-#{month}-01")
-%br
-%br
+  %li= link_to '次年', schedules_path(now_date: @now_date.since(1.year).to_date)
+
 = render partial: '/schedules/calendar', locals: { now_date: @now_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, current_page: 1 }
 
 - # オートページャー用
