@@ -1,6 +1,6 @@
 # Calem
 
-APP_DESCRIPTION.
+Simple Calendar Service.
 
 ## Local Setting
 
