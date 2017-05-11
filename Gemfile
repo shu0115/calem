@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
-ruby '2.3.3'
+ruby '2.4.1'
 
-gem 'rails', '4.2.6'
+gem 'rails', '5.1.0'
 
-gem 'sass-rails',   '~> 4.0.0'
-gem 'coffee-rails', '~> 4.0.0'
-gem 'uglifier', '>= 1.0.3'
-gem 'railties', '>= 4.0.0'
-gem 'activesupport', '>= 4.0.0'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
+gem 'railties'
+gem 'activesupport'
 
 gem 'jquery-rails'
 
@@ -34,10 +34,10 @@ group :development do
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'erb2haml'
-  gem 'quiet_assets'
+  # gem 'erb2haml'
+  # gem 'quiet_assets'
   gem 'colorize_unpermitted_parameters'
-  gem 'rails-flog-disable-sql-format', require: 'flog'
+  # gem 'rails-flog-disable-sql-format', require: 'flog'
   gem 'bullet'
 end
 
