@@ -2,10 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   # ログイン認証
-  before_filter :authorize
+  before_action :authorize
 
   # セッション有効期限延長
-  before_filter :reset_session_expires
+  before_action :reset_session_expires
 
   private
 

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require united/loader
 //= require united/bootswatch
+//= require turbolinks
 
 $(function(){
   $('a[rel=tooltip]').tooltip( { html: true, placement: 'bottom', trigger: 'hover' } );

@@ -45,9 +45,11 @@ class SchedulesController < ApplicationController
   end
 
   def destroy(id)
-    schedule = Schedule.where(id: id, user_id: current_user.id).first
-    # schedule.destroy ? flash[:notice] = "スケジュールを削除しました。" : flash[:alert] = "スケジュールが削除出来ませんでした。"
-    schedule.destroy ? nil : flash[:alert] = "スケジュールが削除出来ませんでした。"
+    schedule = Schedule.find_by(id: id, user_id: current_user.id)
+
+    redirect_to schedules_path, alert: 'スケジュールが存在しません。' and return if schedule.blank?
+
+    schedule.destroy ? '' : flash[:alert] = "スケジュールが削除出来ませんでした。"
 
     redirect_to(schedules_path(now_date: schedule.start_time.strftime("%Y-%m-01")))
   end
