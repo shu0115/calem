@@ -10,6 +10,7 @@ gem 'railties'
 gem 'activesupport'
 
 gem 'jquery-rails'
+gem 'turbolinks', '~> 5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -34,7 +35,8 @@ gem 'kaminari'
 gem 'rails_config'
 gem 'tapp-awesome_print'
 gem 'exception_notification'
-gem 'haml-rails'
+# gem 'haml-rails'
+gem 'faml'
 gem 'redcarpet'
 gem 'coderay'
 gem 'holiday_jp'
