@@ -3,4 +3,7 @@
 
 %br
 
-%p= link_to "Login", "/auth/#{Settings.provider}", class: 'btn btn-primary'
+- if current_user.present?
+  %p= link_to "Logout", logout_path, class: 'btn btn-primary'
+- else
+  %p= link_to "Login", "/auth/#{Settings.provider}", class: 'btn btn-primary'

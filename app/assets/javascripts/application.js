@@ -16,7 +16,7 @@
 //= require united/bootswatch
 //= require turbolinks
 
-$(function(){
+document.addEventListener('turbolinks:load', function() {
   $('a[rel=tooltip]').tooltip( { html: true, placement: 'bottom', trigger: 'hover' } );
   $('a[rel=popover]').popover( { html: true, placement: 'bottom', trigger: 'hover' } );
 
@@ -27,7 +27,7 @@ $(function(){
 
   // 初期状態で2ページ目を読み込む(ディスプレイの縦幅が大きい場合スクロールバーが表示されないため)
   add_page($(this));
-});
+})
 
 // オートページャー
 function autopager() {
