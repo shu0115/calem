@@ -13,7 +13,7 @@
         %th 月
         %th 火
         %th 水
-        %th 木
+        %th.thursday 木
         %th.friday 金
         %th.saturday 土
       %tr
@@ -22,14 +22,16 @@
             %br/
         - (now_date.beginning_of_month..now_date.end_of_month).each do |now_day|
           - if now_day.wday == 0 or holiday_hash.has_key?(now_day)
-            - day_class = "sunday"
+            - day_class = 'sunday'
+          - elsif now_day.wday == 4
+            - day_class = 'thursday'
           - elsif now_day.wday == 5
-            - day_class = "friday"
+            - day_class = 'friday'
           - elsif now_day.wday == 6
-            - day_class = "saturday"
+            - day_class = 'saturday'
 
           - if now_day.strftime("%Y/%m/%d") == Time.now.strftime("%Y/%m/%d")
-            - today_class = "today"
+            - today_class = 'today'
           - if now_day.wday == 0
             %tr/
 
