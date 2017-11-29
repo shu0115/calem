@@ -60,9 +60,10 @@
 }
 
 /* 木曜 */
-.calendar_area .thursday, .calendar_area .thursday a {
+/*.calendar_area .thursday, .calendar_area .thursday a {
   color: #00aa00;
 }
+*/
 
 /* 金曜 */
 .calendar_area .friday, .calendar_area .friday a {
