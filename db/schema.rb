@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,12 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20121123064235) do
+ActiveRecord::Schema.define(version: 20171220021744) do
+
+  create_table "off_days", force: :cascade do |t|
+    t.integer "user_id"
+    t.date "target_day"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "schedules", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "title"
-    t.text     "note"
+    t.integer "user_id"
+    t.string "title"
+    t.text "note"
     t.datetime "start_time"
     t.datetime "end_time"
     t.datetime "created_at"
@@ -24,13 +30,13 @@ ActiveRecord::Schema.define(version: 20121123064235) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "name"
-    t.string   "nickname"
-    t.string   "image"
-    t.string   "token"
-    t.string   "secret"
+    t.string "provider"
+    t.string "uid"
+    t.string "name"
+    t.string "nickname"
+    t.string "image"
+    t.string "token"
+    t.string "secret"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

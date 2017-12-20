@@ -4,11 +4,14 @@ class SchedulesController < ApplicationController
   def index(now_date: nil)
     @now_date = now_date.present? ? Date.parse(now_date) : Date.today
 
-    # スケジュールハッシュ生成
+    # スケジュール
     @schedule_hash = generate_schedule_hash(@now_date)
 
-    # 祝日ハッシュ生成
+    # 祝日
     @holiday_hash = generate_holiday_hash(@now_date)
+
+    # オフ日
+    @off_days = OffDay.mine(current_user).where(target_day: @now_date.beginning_of_month..@now_date.end_of_month).pluck(:target_day)
   end
 
   def show(id)
@@ -17,6 +20,7 @@ class SchedulesController < ApplicationController
 
   def new(date)
     @schedule = Schedule.new(start_time: date.to_time, end_time: date.to_time)
+    @now_date = Date.parse(date)
   end
 
   def edit(id)
@@ -54,18 +58,33 @@ class SchedulesController < ApplicationController
     redirect_to(schedules_path(now_date: schedule.start_time.strftime("%Y-%m-01")))
   end
 
+  def set_off_day(target_day)
+    OffDay.find_or_create_by!(target_day: target_day, user_id: current_user.id)
+
+    redirect_to schedules_path(now_date: target_day)
+  end
+
+  def cancel_off_day(target_day)
+    OffDay.mine(current_user).find_by(target_day: target_day).destroy
+
+    redirect_to schedules_path(now_date: target_day)
+  end
+
   # オートページャー
   def pager(target_month: nil, page: 1)
     now_date = target_month.present? ? Date.parse("#{target_month}-01") : Date.today
     now_date = Date.parse(now_date.since(page.to_i.month).strftime("%Y-%m-01"))
 
-    # スケジュールハッシュ生成
+    # スケジュール
     schedule_hash = generate_schedule_hash(now_date)
 
-    # 祝日ハッシュ生成
+    # 祝日
     holiday_hash = generate_holiday_hash(now_date)
 
-    render partial: '/schedules/calendar', locals: { now_date: now_date, holiday_hash: holiday_hash, schedule_hash: schedule_hash, current_page: (page.to_i + 1) }
+    # オフ日
+    off_days = OffDay.mine(current_user).where(target_day: now_date.beginning_of_month..now_date.end_of_month).pluck(:target_day)
+
+    render partial: '/schedules/calendar', locals: { now_date: now_date, holiday_hash: holiday_hash, schedule_hash: schedule_hash, off_days: off_days, current_page: (page.to_i + 1) }
   end
 
   private

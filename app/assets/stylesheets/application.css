@@ -59,6 +59,11 @@
   vertical-align: top;
 }
 
+/* オフ日 */
+.calendar_area .off_day, .calendar_area .off_day a {
+  color: #00aa00;
+}
+
 /* 木曜 */
 /*.calendar_area .thursday, .calendar_area .thursday a {
   color: #00aa00;
