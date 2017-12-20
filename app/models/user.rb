@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   # auth情報更新
   def auth_update(auth)
     image_path = auth["info"]["image"].to_s.gsub('_normal', '') rescue nil
