@@ -1,7 +1,13 @@
-= form_for :schedule, url: schedules_path, html: { class: "form-horizontal" } do |f|
+= form_for :schedule, url: schedules_path, html: { class: 'form-horizontal' } do |f|
   = render partial: '/schedules/form', locals: { f: f }
   .actions
-    = f.submit t("menu.create"), data: { 'disable-with' => t( "menu.create" ) }, class: 'btn btn-primary'
+    = f.submit t('menu.create'), data: { 'disable-with' => t( 'menu.create' ) }, class: 'btn btn-primary'
+
+    - # オフ日設定
+    - if OffDay.mine(current_user).where(target_day: @now_date).exists?
+      = link_to t('menu.cancel_off_day'), cancel_off_day_schedules_path(target_day: @now_date), class: 'btn btn-info'
+    - else
+      = link_to t('menu.off_day'), set_off_day_schedules_path(target_day: @now_date), class: 'btn btn-info'
 
 %br
-= link_to t("menu.list"), schedules_path, class: 'btn btn-default'
+= link_to t('menu.list'), schedules_path, class: 'btn btn-default'
