@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171220021744) do
+ActiveRecord::Schema.define(version: 20181128030450) do
 
   create_table "off_days", force: :cascade do |t|
     t.integer "user_id"
@@ -39,6 +39,12 @@ ActiveRecord::Schema.define(version: 20171220021744) do
     t.string "secret"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string "email"
+    t.string "access_token"
+    t.datetime "access_token_expired_at"
+    t.boolean "active_flag", default: false
+    t.index ["access_token"], name: "index_users_on_access_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end

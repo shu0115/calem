@@ -23,8 +23,15 @@
     .container
       .page_top_margin
         %br/
-        = simple_format( flash[:notice], style: "color: green;" ) unless flash[:notice].blank?
-        = simple_format( flash[:alert], style: "color: red;" ) unless flash[:alert].blank?
+
+        - if flash[:notice].present?
+          .alert.alert-success
+            = simple_format flash[:notice]
+
+        - if flash[:alert].present?
+          .alert.alert-danger
+            = simple_format flash[:alert]
+
         = yield
         %br/
         %br/
