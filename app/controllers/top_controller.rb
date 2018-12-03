@@ -41,6 +41,6 @@ class TopController < ApplicationController
       session[:user_id]                   = user.id
     end
 
-    redirect_to root_path and return
+    redirect_to schedules_path and return
   end
 end
