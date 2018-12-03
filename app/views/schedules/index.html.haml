@@ -7,9 +7,23 @@
       = link_to "#{month}月", schedules_path(now_date: "#{@now_date.year}-#{month}-01")
   %li= link_to '次年', schedules_path(now_date: @now_date.since(1.year).to_date)
 
-= render partial: '/schedules/calendar', locals: { now_date: @now_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, off_days: @off_days, current_page: 1 }
+-# = render partial: '/schedules/calendar', locals: { now_date: @now_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, off_days: @off_days, current_page: 1 }
 
-- # オートページャー用
-= hidden_field_tag :autopager_on, true
-= hidden_field_tag :target_month, @now_date.strftime("%Y-%m")
-= hidden_field_tag :current_page, 1
+= render partial: '/schedules/calendar', locals: { now_date: @now_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, off_days: @off_days }
+= render partial: '/schedules/calendar', locals: { now_date: @now_date.since(1.month).to_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, off_days: @off_days }
+= render partial: '/schedules/calendar', locals: { now_date: @now_date.since(2.month).to_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, off_days: @off_days }
+= render partial: '/schedules/calendar', locals: { now_date: @now_date.since(3.month).to_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, off_days: @off_days }
+= render partial: '/schedules/calendar', locals: { now_date: @now_date.since(4.month).to_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, off_days: @off_days }
+= render partial: '/schedules/calendar', locals: { now_date: @now_date.since(5.month).to_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, off_days: @off_days }
+= render partial: '/schedules/calendar', locals: { now_date: @now_date.since(6.month).to_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, off_days: @off_days }
+= render partial: '/schedules/calendar', locals: { now_date: @now_date.since(7.month).to_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, off_days: @off_days }
+= render partial: '/schedules/calendar', locals: { now_date: @now_date.since(8.month).to_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, off_days: @off_days }
+= render partial: '/schedules/calendar', locals: { now_date: @now_date.since(9.month).to_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, off_days: @off_days }
+= render partial: '/schedules/calendar', locals: { now_date: @now_date.since(10.month).to_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, off_days: @off_days }
+= render partial: '/schedules/calendar', locals: { now_date: @now_date.since(11.month).to_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, off_days: @off_days }
+= render partial: '/schedules/calendar', locals: { now_date: @now_date.since(12.month).to_date, holiday_hash: @holiday_hash, schedule_hash: @schedule_hash, off_days: @off_days }
+
+-# - # オートページャー用
+-# = hidden_field_tag :autopager_on, true
+-# = hidden_field_tag :target_month, @now_date.strftime("%Y-%m")
+-# = hidden_field_tag :current_page, 1

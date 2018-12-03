@@ -11,7 +11,9 @@ class SchedulesController < ApplicationController
     @holiday_hash = generate_holiday_hash(@now_date)
 
     # オフ日
-    @off_days = OffDay.mine(current_user).where(target_day: @now_date.beginning_of_month..@now_date.end_of_month).pluck(:target_day)
+    @off_days = OffDay.mine(current_user)
+                      .where(target_day: @now_date.beginning_of_month..@now_date.since(12.month).end_of_month)
+                      .pluck(:target_day)
   end
 
   def show(id)
@@ -70,29 +72,32 @@ class SchedulesController < ApplicationController
     redirect_to schedules_path(now_date: target_day)
   end
 
-  # オートページャー
-  def pager(target_month: nil, page: 1)
-    now_date = target_month.present? ? Date.parse("#{target_month}-01") : Date.today
-    now_date = Date.parse(now_date.since(page.to_i.month).strftime("%Y-%m-01"))
+  # # オートページャー
+  # def pager(target_month: nil, page: 1)
+  #   now_date = target_month.present? ? Date.parse("#{target_month}-01") : Date.today
+  #   now_date = Date.parse(now_date.since(page.to_i.month).strftime("%Y-%m-01"))
 
-    # スケジュール
-    schedule_hash = generate_schedule_hash(now_date)
+  #   # スケジュール
+  #   schedule_hash = generate_schedule_hash(now_date)
 
-    # 祝日
-    holiday_hash = generate_holiday_hash(now_date)
+  #   # 祝日
+  #   holiday_hash = generate_holiday_hash(now_date)
 
-    # オフ日
-    off_days = OffDay.mine(current_user).where(target_day: now_date.beginning_of_month..now_date.end_of_month).pluck(:target_day)
+  #   # オフ日
+  #   off_days = OffDay.mine(current_user).where(target_day: now_date.beginning_of_month..now_date.end_of_month).pluck(:target_day)
 
-    render partial: '/schedules/calendar', locals: { now_date: now_date, holiday_hash: holiday_hash, schedule_hash: schedule_hash, off_days: off_days, current_page: (page.to_i + 1) }
-  end
+  #   render partial: '/schedules/calendar', locals: { now_date: now_date, holiday_hash: holiday_hash, schedule_hash: schedule_hash, off_days: off_days, current_page: (page.to_i + 1) }
+  # end
 
   private
 
   # スケジュールハッシュ生成
   def generate_schedule_hash(now_date)
     schedule_hash = Hash.new{ |hash, key| hash[key] = Array.new }
-    schedules = Schedule.mine(current_user).where(start_time: (now_date.beginning_of_month.beginning_of_day..now_date.end_of_month.end_of_day)).order("schedules.start_time ASC")
+    schedules = Schedule.mine(current_user)
+                        .where(start_time: (now_date.beginning_of_month.beginning_of_day..now_date.since(12.month).end_of_month.end_of_day))
+                        .order("schedules.start_time ASC")
+
     schedules.each do |s|
       schedule_hash[s.start_time.strftime("%Y_%m_%d")].push(s)
     end
@@ -103,7 +108,8 @@ class SchedulesController < ApplicationController
   # 祝日ハッシュ生成
   def generate_holiday_hash(now_date)
     holiday_hash = Hash.new
-    HolidayJp.between(now_date.beginning_of_month, now_date.end_of_month).each do |h|
+
+    HolidayJp.between(now_date.beginning_of_month, now_date.since(12.month).end_of_month).each do |h|
       holiday_hash[h.date] = h.name
     end
 
