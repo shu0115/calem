@@ -434,7 +434,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   minimum-omniauth-scaffold
   newrelic_rpm
-  pg (= 0.21.0)
+  pg
   pry-rails
   puma
   rails (= 6.1.4)
