@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.6.3'
+ruby '3.0.2'
 
-gem 'rails', '5.2.3'
+gem 'rails', '6.1.4'
 
 gem 'sass-rails'
 gem 'coffee-rails'
@@ -35,11 +35,12 @@ gem 'kaminari'
 gem 'rails_config'
 gem 'tapp-awesome_print'
 gem 'exception_notification'
-# gem 'haml-rails'
-gem 'faml'
+gem 'haml-rails'
+# gem 'faml'
 gem 'redcarpet'
 gem 'coderay'
 gem 'holiday_jp'
+gem 'rexml'
 
 ## Design Template
 gem 'therubyracer', platforms: :ruby
@@ -59,7 +60,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'sqlite3', '~> 1.3.6'
+  gem 'sqlite3'
   gem 'rspec-rails'
 
   gem 'letter_opener'
