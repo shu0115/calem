@@ -69,7 +69,7 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'pg', '= 0.21.0'
+  gem 'pg'
   gem 'newrelic_rpm'
   gem 'bounscale'
   gem 'bugsnag'
