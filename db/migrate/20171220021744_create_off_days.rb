@@ -1,4 +1,4 @@
-class CreateOffDays < ActiveRecord::Migration[5.1]
+class CreateOffDays < ActiveRecord::Migration[4.2]
   def change
     create_table :off_days do |t|
       t.integer :user_id

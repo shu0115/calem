@@ -1,4 +1,4 @@
-class AddEmailAccessTokenToUsers < ActiveRecord::Migration[5.1]
+class AddEmailAccessTokenToUsers < ActiveRecord::Migration[4.2]
   def change
     add_column :users, :email, :string
     add_column :users, :access_token, :string
